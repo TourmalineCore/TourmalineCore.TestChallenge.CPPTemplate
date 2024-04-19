@@ -1,0 +1,1 @@
+FROM ghcr.io/tourmalinecore/cpp-template:latest
