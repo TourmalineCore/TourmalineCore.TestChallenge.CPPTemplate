@@ -9,4 +9,5 @@
 TEST(CPPTemplate, DummyTest)
 {
     ASSERT_EQ(dummy_function(), "Hello from dummy_function");
+    ASSERT_EQ(2, 2);
 }
