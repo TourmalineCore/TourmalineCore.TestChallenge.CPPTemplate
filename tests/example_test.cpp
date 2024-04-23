@@ -11,4 +11,3 @@ TEST(TestTrow, TrowScoreTest)
 {   
     ASSERT_TRUE(checkSize(scoreForTrow(0, 10)));
 }
-

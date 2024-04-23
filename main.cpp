@@ -4,9 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-    int startRange = 0;
-    int endRange = 10;
-    cout << scoreForTrow(startRange, endRange);
+    paint(scoreVector());
     
     return 0;
 }
