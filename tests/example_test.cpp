@@ -1,13 +1,14 @@
-
 #include <gtest/gtest.h>
-
 #include "example.h"
 
-
-// TEST(TEST_SUITE, TEST_CASE)
-
-TEST(CPPTemplate, DummyTest)
-{
-    ASSERT_EQ(dummy_function(), "Hello from dummy_function");
-    ASSERT_EQ(2, 2);
+// help func, count in one trow must be [0; 10]
+bool checkSize(int count) {
+    if (count < 0 || count > 10) return false;
+    return true;
 }
+
+TEST(TestTrow, TrowScoreTest)
+{   
+    ASSERT_TRUE(checkSize(scoreForTrow(0, 10)));
+}
+

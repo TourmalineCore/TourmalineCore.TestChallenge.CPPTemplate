@@ -1,14 +1,12 @@
 #include <iostream>
-
 #include "includes/example.h"
 
 
 int main(int argc, char* argv[])
 {
-
-    std::cout << "Hello world!" << std::endl;
-
-    std::cout << dummy_function() << std::endl;
+    int startRange = 0;
+    int endRange = 10;
+    cout << scoreForTrow(startRange, endRange);
     
     return 0;
 }

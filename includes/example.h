@@ -1,4 +1,11 @@
-
 #include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
-std::string dummy_function();
+using namespace std;
+
+int scoreForTrow(int startRange, int endRange);
+
+
+
