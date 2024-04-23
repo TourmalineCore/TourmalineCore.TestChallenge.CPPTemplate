@@ -11,7 +11,7 @@ int scoreForTrow(int startRange, int endRange) {
     return x;
 }
 
-// func for writing down result of throws
+// func for writing down result of throws v1
 vector<vector<int>> scoreVector() {
     
     int startRange = 0;
@@ -44,6 +44,20 @@ vector<vector<int>> scoreVector() {
 
     }
 
+    return resData;
+}
+
+// func for writing down result of throws v2
+vector<vector<int>> scoreVector2(int data[10][2]) {
+
+    vector <vector <int>> resData (10, vector <int>(2));
+              
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 2; j++) {
+            resData[i][j] = data[i][j];
+        }
+    }
+    
     return resData;
 }
 
