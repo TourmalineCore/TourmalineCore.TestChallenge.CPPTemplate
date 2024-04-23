@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int scoreForTrow(int startRange, int endRange);
+int scoreForThrow(int startRange, int endRange);
 
 vector<vector<int>> scoreVector();
 vector<vector<int>> scoreVector2(int data[10][2]);

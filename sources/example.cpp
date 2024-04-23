@@ -5,8 +5,8 @@
  * calculate count score of downed pins
  * return any number from range [startRange; endRange]
  */ 
-int scoreForTrow(int startRange, int endRange) {
-    //srand(time(NULL)); // Initializing pseudorandom number generator
+int scoreForThrow(int startRange, int endRange) {
+    srand(time(NULL)); // Initializing pseudorandom number generator
     int x = rand() % (endRange - startRange + 1) + startRange; 
     return x;
 }
@@ -20,24 +20,24 @@ vector<vector<int>> scoreVector() {
 
     for (int frameIndex = 0; frameIndex < 10; frameIndex++) {
 
-        int scoreCount = scoreForTrow(startRange, endRange); // [0; 10]
+        int scoreCount = scoreForThrow(startRange, endRange); // [0; 10]
 
-        for (int trowIndex = 0; trowIndex < 2; trowIndex++) {   
+        for (int throwIndex = 0; throwIndex < 2; throwIndex++) {   
 
             // write strike
             if (scoreCount == 10) {
-                resData[frameIndex][trowIndex] = 10;
-                resData[frameIndex][trowIndex + 1] = 0;
+                resData[frameIndex][throwIndex] = 10;
+                resData[frameIndex][throwIndex + 1] = 0;
                 break;
             }
 
             // write other results
-            else if (trowIndex == 1) { // second trow
+            else if (throwIndex == 1) { // second trow
                 
-                resData[frameIndex][trowIndex] = scoreForTrow(startRange, endRange - scoreCount); // [0; 10 - first trow]
+                resData[frameIndex][throwIndex] = scoreForThrow(startRange, endRange - scoreCount); // [0; 10 - first trow]
             }
             else { // first trow
-                resData[frameIndex][trowIndex] = scoreCount;
+                resData[frameIndex][throwIndex] = scoreCount;
             }
 
         }
