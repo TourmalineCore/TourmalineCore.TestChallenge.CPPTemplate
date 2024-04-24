@@ -188,5 +188,5 @@ void paint(vector<vector<int>> scoreVector) {
 
 // func print total scores
 void paint(int totalScore) {
-    cout <<"\nTotal score for all frames = " << totalScore;
+    cout <<"\nTotal score for all frames = " << totalScore << "\n";
 }

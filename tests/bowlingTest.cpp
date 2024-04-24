@@ -127,3 +127,30 @@ TEST(TotalScoreTest, AmountScored)
 
     EXPECT_EQ(totalScore(scoreFrameVector), 88);
 }
+
+TEST(PaintTest, NoErrorAndException) 
+{   
+    // create our matrix with downed pins by frame
+    int scoresInMatrix[10][2] { 
+    {1, 2}, {4, 5}, {10, 0}, {5, 5}, {9, 1}, 
+    {5, 5}, {5, 5}, {4, 7}, {4, 5}, {4, 5} };
+
+    // convert matrix to vector
+    vector<std::vector<int>> scoresInVector = scoreVector2(scoresInMatrix);
+
+    // sum res by frames
+    vector<int> scoresByFrames = sumResultInFrame(scoresInVector);
+
+    // calc total score
+    int totalScores =  totalScore(scoresByFrames);
+
+    ASSERT_NO_THROW(paint(scoresInVector));
+    ASSERT_NO_THROW(paint(scoresByFrames));
+    ASSERT_NO_THROW(paint(totalScores));
+
+    ASSERT_NO_FATAL_FAILURE(paint(scoresInVector));
+    ASSERT_NO_FATAL_FAILURE(paint(scoresByFrames));
+    ASSERT_NO_FATAL_FAILURE(paint(totalScores));
+
+    
+}
