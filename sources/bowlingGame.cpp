@@ -65,11 +65,36 @@ vector<vector<int>> scoreVector2(int data[10][2]) {
 vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
 
     vector<int> frameResData(10);
+    char message[100];
 
-    for (int frameIndex = 0, throwIndex = 0; frameIndex < 10;) {
+    for (int frameIndex = 0; frameIndex < 10;) {
+        
+        /* 
+         * exception
+         * correct diapazone is [0; 10]
+         * if user use scores like [15][0] or [3][-1] throw exeption
+         */ 
+        if (scoreVector[frameIndex][0] < 0 || scoreVector[frameIndex][0] > 10 
+        || scoreVector[frameIndex][1] < 0 || scoreVector[frameIndex][1] > 10) {
+            sprintf(message, "\nWrong entry! Incorrect diapazone, must be [0; 10], your diapazone is [%d; %d]\n", 
+            scoreVector[frameIndex][0], scoreVector[frameIndex][1]);
+            throw runtime_error (message);
+        }
+
 
         // strike
         if (scoreVector[frameIndex][0] == 10) {
+            
+            /* 
+             * exception for strike
+             * correct stike in frame is [10][0]
+             * if user use strike like [10][1] throw exeption
+             */ 
+            if (scoreVector[frameIndex][1] != 0) {
+                sprintf(message, "\nWrong entry! Strike viewed like [10][0], your strike is [%d][%d]\n", 
+                scoreVector[frameIndex][0], scoreVector[frameIndex][1]);
+                throw runtime_error (message);
+            }
 
             // if this is last strike, then write 10 and break
             if (frameIndex == 9) {
@@ -78,10 +103,10 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
             }
 
             // default strike, write 10 and add score in next frame
-            frameResData[frameIndex] = 10 + scoreVector[frameIndex + 1][throwIndex] + scoreVector[frameIndex + 1][throwIndex + 1];
+            frameResData[frameIndex] = 10 + scoreVector[frameIndex + 1][0] + scoreVector[frameIndex + 1][1];
 
             // triple strike
-            if (scoreVector[frameIndex + 1][throwIndex] == 10 && scoreVector[frameIndex + 2][throwIndex] == 10) {
+            if (scoreVector[frameIndex + 1][0] == 10 && scoreVector[frameIndex + 2][0] == 10) {
                 frameResData[frameIndex] = 30;
             }
 
@@ -90,8 +115,8 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
         }
 
         // spare
-        else if (scoreVector[frameIndex][throwIndex] + scoreVector[frameIndex][throwIndex + 1] == 10 
-        && scoreVector[frameIndex][throwIndex + 1] != 0) {
+        else if (scoreVector[frameIndex][0] + scoreVector[frameIndex][1] == 10 
+        && scoreVector[frameIndex][1] != 0) {
 
             // if this is last spare, then write 10 and break
             if (frameIndex == 9) {
@@ -100,7 +125,7 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
             }
 
             // default spare, write 10 and score for one trow in next frame
-            frameResData[frameIndex] = 10 + scoreVector[frameIndex + 1][throwIndex];
+            frameResData[frameIndex] = 10 + scoreVector[frameIndex + 1][0];
 
             frameIndex++;
 
@@ -111,12 +136,12 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
 
             // if this is last throw, then write sum in last frame and break
             if (frameIndex == 9) {
-                frameResData[frameIndex] = scoreVector[frameIndex][throwIndex] + scoreVector[frameIndex][throwIndex + 1];
+                frameResData[frameIndex] = scoreVector[frameIndex][0] + scoreVector[frameIndex][1];
                 break;
             }
 
             // default throw, write sum this frame
-            frameResData[frameIndex] = scoreVector[frameIndex][throwIndex] + scoreVector[frameIndex][throwIndex + 1];
+            frameResData[frameIndex] = scoreVector[frameIndex][0] + scoreVector[frameIndex][1];
 
             frameIndex++;
 
