@@ -131,7 +131,7 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
 
         }
 
-        // default throw
+        // default throw (i mean for example when u trow in firs 3 and second trow 5)
         else {
 
             // if this is last throw, then write sum in last frame and break
