@@ -1,5 +1,5 @@
 #include <iostream>
-#include "includes/example.h"
+#include "includes/bowlingGame.h"
 
 
 int main(int argc, char* argv[]) {

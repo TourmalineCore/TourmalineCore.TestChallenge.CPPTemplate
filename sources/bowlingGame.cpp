@@ -1,5 +1,5 @@
 #include <iostream>
-#include "example.h"
+#include "bowlingGame.h"
 
 /* 
  * calculate count score of downed pins
@@ -69,7 +69,7 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
     for (int frameIndex = 0, throwIndex = 0; frameIndex < 10;) {
 
         // strike
-        if (scoreVector[frameIndex][throwIndex] == 10) {
+        if (scoreVector[frameIndex][0] == 10) {
 
             // if this is last strike, then write 10 and break
             if (frameIndex == 9) {
