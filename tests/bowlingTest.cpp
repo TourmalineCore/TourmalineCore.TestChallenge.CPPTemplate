@@ -151,6 +151,4 @@ TEST(PaintTest, NoErrorAndException)
     ASSERT_NO_FATAL_FAILURE(paint(scoresInVector));
     ASSERT_NO_FATAL_FAILURE(paint(scoresByFrames));
     ASSERT_NO_FATAL_FAILURE(paint(totalScores));
-
-    
 }

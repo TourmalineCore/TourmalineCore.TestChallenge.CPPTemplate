@@ -19,5 +19,24 @@ int main(int argc, char* argv[]) {
     paint(data);
     paint(res);
 
+    /* 
+     * second version when u write your result in matrix
+     * write strike, tripple strike, usual throws and spare
+     */
+
+    // our matrix with downed pins by frame
+    int scoresInMatrix[10][2] { 
+    {1, 2}, {4, 5}, {10, 0}, {5, 5}, {9, 1}, 
+    {5, 5}, {5, 5}, {4, 7}, {4, 5}, {4, 5} };
+
+    vector<std::vector<int>> scoresInVector = scoreVector2(scoresInMatrix); // convert matrix to vector
+    vector<int> scoresByFrames = sumResultInFrame(scoresInVector); // sum scores by frame
+    int totalScores =  totalScore(scoresByFrames); // calc total scores
+
+    paint(scoresInVector);
+    paint(scoresByFrames);
+    paint(totalScores);
+
     return 0;
+    
 }
