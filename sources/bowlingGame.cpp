@@ -152,6 +152,12 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
     return frameResData;
 }
 
+// func calculate total score
+int totalScore(vector<int> frameResData) {
+    return accumulate(frameResData.begin(), frameResData.end(), 0);
+}
+
+// func print scores in frame
 void paint(vector<int> sumResultInFrame) {
 
     cout << "\nFrame index:\n";
@@ -166,6 +172,7 @@ void paint(vector<int> sumResultInFrame) {
 
 }
 
+// func print all scores
 void paint(vector<vector<int>> scoreVector) {
 
     cout << "\nScore:\n";
@@ -177,4 +184,9 @@ void paint(vector<vector<int>> scoreVector) {
     }
     cout << '\n';
 
+}
+
+// func print total scores
+void paint(int totalScore) {
+    cout <<"\nTotal score for all frames = " << totalScore;
 }

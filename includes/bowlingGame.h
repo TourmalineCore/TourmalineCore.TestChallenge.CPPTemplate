@@ -15,3 +15,6 @@ void paint(vector<vector<int>> scoreVector);
 
 vector<int> sumResultInFrame(vector<vector<int>> scoreVector);
 void paint(vector<int> sumResultInFrame);
+
+int totalScore(vector<int> frameResData);
+void paint(int totalScore);

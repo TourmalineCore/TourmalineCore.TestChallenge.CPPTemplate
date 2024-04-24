@@ -5,7 +5,7 @@
 int main(int argc, char* argv[]) {
 
     srand(time(NULL)); // Initializing pseudorandom number generator
-
+    
     vector<vector<int>> vect = scoreVector();
     vector<int> data = sumResultInFrame(vect);
 

@@ -64,7 +64,6 @@ TEST(SumResultInFrameTest, Diapazone)
     ASSERT_THROW(sumResultInFrame(scoreVector2), runtime_error);
 }
 
-
 TEST(SumResultInFrameTest, Spare) 
 {   
     vector<std::vector<int>> scoreVector = { 
@@ -95,14 +94,36 @@ TEST(SumResultInFrameTest, DefaultThrow)
     };
 
     vector<int> scoreFrameVector = sumResultInFrame(scoreVector);
-    
-    for (int i = 0; i < scoreFrameVector.size(); i += 2) {
-        EXPECT_EQ(scoreFrameVector[i], 0);
-    }
 
     EXPECT_EQ(scoreFrameVector[1], 8);
     EXPECT_EQ(scoreFrameVector[3], 9);
     EXPECT_EQ(scoreFrameVector[5], 5);
     EXPECT_EQ(scoreFrameVector[7], 7);
     EXPECT_EQ(scoreFrameVector[9], 8);
+
+    // check unlucky trow wich {0, 0}
+    for (int i = 0; i < scoreFrameVector.size(); i += 2) {
+        EXPECT_EQ(scoreFrameVector[i], 0);
+    }
+}
+
+TEST(TotalScoreTest, AmountScored) 
+{   
+    vector<std::vector<int>> scoreVector = { 
+        {10, 0}, {5, 3}, 
+        {5, 5}, {9, 1},
+        {4, 3}, {0, 5},
+        {0, 0}, {4, 3},
+        {0, 0}, {10, 0}  
+    };
+
+    /* 
+     * scores for frame: 1f = 18; 2f = 8; 3f = 19; 4f = 14;
+     * 5f = 7; 6f = 6; 7f = 0; 8f = 7; 9f = 0; 10f = 10.
+     * total scores for all frames = 88
+     */
+
+    vector<int> scoreFrameVector = sumResultInFrame(scoreVector);
+
+    EXPECT_EQ(totalScore(scoreFrameVector), 88);
 }
