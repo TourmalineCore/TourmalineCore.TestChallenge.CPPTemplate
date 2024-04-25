@@ -6,7 +6,6 @@
  * return any number from range [startRange; endRange]
  */ 
 int scoreForThrow(int startRange, int endRange) {
-    srand(time(NULL)); // Initializing pseudorandom number generator
     int x = rand() % (endRange - startRange + 1) + startRange; 
     return x;
 }
@@ -44,20 +43,12 @@ vector<vector<int>> scoreVector() {
 
     }
 
-    return resData;
-}
-
-// func for writing down result of throws v2
-vector<vector<int>> scoreVector2(int data[10][2]) {
-
-    vector <vector <int>> resData (10, vector <int>(2));
-              
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 2; j++) {
-            resData[i][j] = data[i][j];
-        }
+    // last spare (do 3th throw)
+    if (resData[9][0] + resData[9][1] == 10 && resData[9][0] != 10) {
+        resData[9].resize(3);
+        resData[9][2] = scoreForThrow(startRange, endRange);
     }
-    
+
     return resData;
 }
 
@@ -105,6 +96,11 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
             // default strike, write 10 and add score in next frame
             frameResData[frameIndex] = 10 + scoreVector[frameIndex + 1][0] + scoreVector[frameIndex + 1][1];
 
+            // double strike
+            if (scoreVector[frameIndex + 1][0] == 10) {
+                frameResData[frameIndex] = 20 + scoreVector[frameIndex + 2][0];
+            }
+
             // triple strike
             if (scoreVector[frameIndex + 1][0] == 10 && scoreVector[frameIndex + 2][0] == 10) {
                 frameResData[frameIndex] = 30;
@@ -118,9 +114,15 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
         else if (scoreVector[frameIndex][0] + scoreVector[frameIndex][1] == 10 
         && scoreVector[frameIndex][1] != 0) {
 
-            // if this is last spare, then write 10 and break
+            // if this is last spare, then sum in last frame 3 throws
             if (frameIndex == 9) {
-                frameResData[frameIndex] = 10;
+                if (scoreVector[9][2] < 0 || scoreVector[9][2] > 10) {
+                    sprintf(message, "\nWrong entry! Incorrect diapazone! Your last spare is [%d; /; %d]\n",
+                        scoreVector[9][0], scoreVector[9][2]);
+                    throw runtime_error(message);
+                }
+                
+                frameResData[frameIndex] = 10 + scoreVector[9][2];
                 break;
             }
 
@@ -133,6 +135,8 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
 
         // default throw (i mean for example when u trow in firs 3 and second trow 5)
         else {
+            
+            if (scoreVector[frameIndex][0] + scoreVector[frameIndex][1] > 10) throw runtime_error("Error!");
 
             // if this is last throw, then write sum in last frame and break
             if (frameIndex == 9) {
@@ -148,7 +152,7 @@ vector<int> sumResultInFrame(vector<vector<int>> scoreVector) {
         }
 
     }
-
+    
     return frameResData;
 }
 
@@ -180,6 +184,9 @@ void paint(vector<vector<int>> scoreVector) {
         for (int throwIndex = 0; throwIndex < scoreVector[0].size(); throwIndex++) {
             cout << scoreVector[frameIndex][throwIndex] << "\t";
         }
+        if (scoreVector[frameIndex].size() == 3) {
+            cout << scoreVector[9][2] << "\t";
+        }
         cout << '\n';
     }
     cout << '\n';
@@ -188,5 +195,17 @@ void paint(vector<vector<int>> scoreVector) {
 
 // func print total scores
 void paint(int totalScore) {
-    cout <<"\nTotal score for all frames = " << totalScore << "\n";
+    cout << "\nTotal score for all frames = " << totalScore << "\n";
+}
+
+// func print scores by throw in frame (start index 1)
+void paint(vector<vector<int>> scoreVector, int throwIndex, int frameIndex) {
+    cout << "Score in "<< throwIndex <<"st throw of frame " << frameIndex 
+        << " = " << scoreVector[frameIndex - 1][throwIndex - 1] << "\n";
+}
+
+
+// func print scores in frame (start index 1)
+void paint(vector<int> sumResultInFrame, int frameIndex) {
+    cout << "Score in frame "<< frameIndex <<" = " << sumResultInFrame[frameIndex - 1] << "\n";
 }
