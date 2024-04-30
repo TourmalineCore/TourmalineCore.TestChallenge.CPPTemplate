@@ -24,6 +24,10 @@ void BowlingGame::sumResultInFrame() {
             sprintf(message, "\nWrong entry! Incorrect diapazone, must be [0; 10], your diapazone is [%d; %d]\n",
                 scoreVector[frameIndex][0], scoreVector[frameIndex][1]);
             throw runtime_error(message);
+        } else if (frameIndex != 9 && scoreVector[frameIndex].size() == 3) {
+            throw runtime_error("Incorret size in frame!");
+        } else if (scoreVector.size() != 10) {
+            throw runtime_error("Incorret size of vector with result!");
         }
 
         // strike
@@ -54,8 +58,10 @@ void BowlingGame::sumResultInFrame() {
                 // last double strike
                 if (frameIndex + 1 == 9) {
                     frameResData[frameIndex] = 20;
+                    frameResData[frameIndex + 1] = 10;
                     // all strikes
-                    if (scoreVector[frameIndex + 1][0] == 10) {
+                    if (scoreVector[frameIndex + 1][0] == 10 && scoreVector[frameIndex - 1][0] == 10 
+                    && scoreVector[frameIndex - 2][0] == 10 && scoreVector[frameIndex - 3][0] == 10) {
                         frameResData[frameIndex] = 30;
                         frameResData[frameIndex + 1] = 30;
                         break;
@@ -85,8 +91,7 @@ void BowlingGame::sumResultInFrame() {
                     sprintf(message, "\nWrong entry! Incorrect diapazone! Your last spare is [%d; /; %d]\n",
                         scoreVector[9][0], scoreVector[9][2]);
                     throw runtime_error(message);
-                }
-
+                } else if (scoreVector[9].size() != 3) throw runtime_error("Incorrect last frame!");
                 frameResData[frameIndex] = 10 + scoreVector[9][2];
                 break;
             }
@@ -171,4 +176,12 @@ int BowlingGame::getResultByThrow(int frameIndex, int throwIndex) {
 
 int BowlingGame::getTotalScore() {
     return totalScore;
+}
+
+vector<vector<int>> BowlingGame::getScoreVector() {
+    return scoreVector;
+}
+
+vector<int> BowlingGame::getFrameResData() {
+    return frameResData;
 }

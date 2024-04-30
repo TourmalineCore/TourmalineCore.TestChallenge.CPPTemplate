@@ -21,5 +21,7 @@ public: void setResult(vector<vector<int>> vec);
 		int getResultByFrame(int frameIndex);
 		int getResultByThrow(int frameIndex, int throwIndex);
         int getTotalScore();
+        vector<vector<int>> getScoreVector();
+        vector<int> getFrameResData();
 
 };
