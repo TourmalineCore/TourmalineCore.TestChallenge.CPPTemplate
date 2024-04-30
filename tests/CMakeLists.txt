@@ -1,5 +1,4 @@
 include(CTest)
-
 include(FetchContent)
 include(GoogleTest)
 
@@ -16,7 +15,7 @@ set(TEST_TARGET ${CMAKE_PROJECT_NAME}_unit_tests)
 
 set(
     SOURCES
-    example_test.cpp
+    bowlingTest.cpp
 )
 
 add_executable(${TEST_TARGET} run_unit_tests.cpp ${SOURCES})
